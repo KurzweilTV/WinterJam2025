@@ -29,6 +29,15 @@ tile_set = ExtResource("1_fgv04")
 [node name="Candle" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
 position = Vector2(143, 73)
 
+[node name="Candle2" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
+position = Vector2(287, 143)
+
+[node name="Candle3" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
+position = Vector2(243, 52)
+
+[node name="Candle4" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
+position = Vector2(35, 146)
+
 [node name="Player" parent="." instance=ExtResource("2_kvx8o")]
 position = Vector2(57, 75)
 
