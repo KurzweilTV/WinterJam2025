@@ -1,0 +1,65 @@
+[gd_scene load_steps=10 format=3 uid="uid://dueyynvjri4bv"]
+
+[ext_resource type="Texture2D" uid="uid://ch17u4haemin6" path="res://objects/candle/candle.png" id="1_2arjo"]
+[ext_resource type="Script" uid="uid://34c46ys8x433" path="res://objects/candle/candle.gd" id="1_shghq"]
+[ext_resource type="PackedScene" uid="uid://i3251npuu1rq" path="res://objects/candle/candle_light.tscn" id="2_7mkfp"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_shghq"]
+atlas = ExtResource("1_2arjo")
+region = Rect2(16, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_dv5ly"]
+atlas = ExtResource("1_2arjo")
+region = Rect2(32, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o04kq"]
+atlas = ExtResource("1_2arjo")
+region = Rect2(48, 0, 16, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jhdlr"]
+atlas = ExtResource("1_2arjo")
+region = Rect2(0, 0, 16, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_o04kq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_shghq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_dv5ly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_o04kq")
+}],
+"loop": true,
+"name": &"burn",
+"speed": 3.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jhdlr")
+}],
+"loop": true,
+"name": &"off",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5oaro"]
+radius = 29.017237
+
+[node name="Candle" type="Area2D"]
+script = ExtResource("1_shghq")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_o04kq")
+animation = &"burn"
+autoplay = "off"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_5oaro")
+
+[node name="CandleLight" parent="." instance=ExtResource("2_7mkfp")]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

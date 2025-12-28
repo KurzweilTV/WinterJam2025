@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://i3251npuu1rq"]
+
+[sub_resource type="Gradient" id="Gradient_xxgcw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_exd8k"]
+gradient = SubResource("Gradient_xxgcw")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
+
+[node name="CandleLight" type="PointLight2D"]
+visible = false
+scale = Vector2(7.5, 7.4218745)
+color = Color(0.7086463, 0.36517972, 1.92523e-07, 1)
+shadow_enabled = true
+shadow_filter = 2
+texture = SubResource("GradientTexture2D_exd8k")

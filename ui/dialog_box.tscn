@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://csyr2lmnunpqd"]
+
+[ext_resource type="Texture2D" uid="uid://duk8js55h5xov" path="res://ui/dialog_border.png" id="1_xjwg2"]
+[ext_resource type="FontFile" uid="uid://pj6py67n1jj2" path="res://art/fonts/Kenney Pixel.ttf" id="2_fks3t"]
+[ext_resource type="Script" uid="uid://csvxyq6otkekx" path="res://ui/dialog_box.gd" id="2_n2uwo"]
+[ext_resource type="AudioStream" uid="uid://cr6hu8feips2c" path="res://sounds/text_tick.ogg" id="4_n2uwo"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_2kg81"]
+font = ExtResource("2_fks3t")
+font_size = 18
+shadow_size = 0
+shadow_color = Color(0.33339897, 0.31390724, 0.30303875, 0.5294118)
+
+[sub_resource type="Animation" id="Animation_gegfo"]
+resource_name = "appear"
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xkf1p"]
+_data = {
+&"appear": SubResource("Animation_gegfo")
+}
+
+[node name="DialogBox" type="NinePatchRect"]
+z_index = 100
+custom_minimum_size = Vector2(0, 60)
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 12.0
+offset_top = -66.0
+offset_right = -12.0
+offset_bottom = -5.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("1_xjwg2")
+region_rect = Rect2(0, 0, 48, 48)
+patch_margin_left = 10
+patch_margin_top = 10
+patch_margin_right = 10
+patch_margin_bottom = 10
+script = ExtResource("2_n2uwo")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Label" type="Label" parent="MarginContainer"]
+custom_minimum_size = Vector2(200, 45)
+layout_mode = 2
+size_flags_vertical = 1
+text = "
+"
+label_settings = SubResource("LabelSettings_2kg81")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+clip_text = true
+text_overrun_behavior = 1
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_n2uwo")
+volume_db = -10.0
+pitch_scale = 0.8
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xkf1p")
+}

@@ -16,6 +16,10 @@ run/print_header=false
 config/features=PackedStringArray("4.5", "GL Compatibility")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Signals="*res://globals/signal_manager.gd"
+
 [display]
 
 window/size/viewport_width=240
@@ -23,6 +27,7 @@ window/size/viewport_height=180
 window/size/window_width_override=960
 window/size/window_height_override=720
 window/stretch/mode="canvas_items"
+mouse_cursor/custom_image="uid://cxnhdkojq7u87"
 
 [editor_plugins]
 

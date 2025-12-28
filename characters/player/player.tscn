@@ -1,18 +1,9 @@
-[gd_scene load_steps=25 format=3 uid="uid://hgbovpv3nek6"]
+[gd_scene load_steps=29 format=3 uid="uid://hgbovpv3nek6"]
 
 [ext_resource type="Texture2D" uid="uid://yc0i2yx4qwvu" path="res://art/characters/Basic_Characters.png" id="1_508ok"]
 [ext_resource type="Script" uid="uid://dxxyamrncmrts" path="res://characters/player/player.gd" id="1_xxgcw"]
-
-[sub_resource type="Gradient" id="Gradient_xxgcw"]
-colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_exd8k"]
-gradient = SubResource("Gradient_xxgcw")
-width = 16
-height = 16
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(1, 0.5)
+[ext_resource type="PackedScene" uid="uid://i3251npuu1rq" path="res://objects/candle/candle_light.tscn" id="2_5dc8e"]
+[ext_resource type="FontFile" uid="uid://pj6py67n1jj2" path="res://art/fonts/Kenney Pixel.ttf" id="3_exd8k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxgcw"]
 atlas = ExtResource("1_508ok")
@@ -172,18 +163,73 @@ animations = [{
 radius = 3.0
 height = 14.0
 
+[sub_resource type="LabelSettings" id="LabelSettings_5dc8e"]
+font = ExtResource("3_exd8k")
+font_size = 14
+
+[sub_resource type="Animation" id="Animation_exd8k"]
+resource_name = "float"
+loop_mode = 1
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0, -47.000004, -0.083333336, 0, 0.083333336, 0, -47, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0, -42.999996, -0.083333336, 0, 0.083333336, 0, -41, -0.16666667, 0, 0, 0),
+"times": PackedFloat32Array(0, 0.5, 1)
+}
+
+[sub_resource type="Animation" id="Animation_5dc8e"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position:x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-47, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+tracks/1/type = "bezier"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position:y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(-41, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_5dc8e"]
+_data = {
+&"RESET": SubResource("Animation_5dc8e"),
+&"float": SubResource("Animation_exd8k")
+}
+
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xxgcw")
 speed = 40
 
-[node name="CandleLight" type="PointLight2D" parent="."]
-visible = false
+[node name="CandleLight" parent="." instance=ExtResource("2_5dc8e")]
 position = Vector2(0, 2.9802322e-08)
-scale = Vector2(7.5, 7.4218745)
-color = Color(0.7086463, 0.36517972, 1.92523e-07, 1)
-shadow_enabled = true
-shadow_filter = 2
-texture = SubResource("GradientTexture2D_exd8k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5dc8e")
@@ -197,3 +243,22 @@ shape = SubResource("CapsuleShape2D_508ok")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
+
+[node name="InteractLabel" type="Label" parent="."]
+visible = false
+z_index = 100
+offset_left = -47.0
+offset_top = -41.0
+offset_right = 47.0
+offset_bottom = -11.0
+text = "Press E to Light Candle"
+label_settings = SubResource("LabelSettings_5dc8e")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="InteractLabel"]
+libraries = {
+&"": SubResource("AnimationLibrary_5dc8e")
+}
+autoplay = "float"

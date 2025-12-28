@@ -1,10 +1,15 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 @export var speed = 50
-var last_direction: Vector2 = Vector2.DOWN # Track last direction for idle facing
+var dialog_open: bool = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var candle_light: PointLight2D = $CandleLight
+@onready var interact_label: Label = $InteractLabel
 
+func _ready() -> void:
+	Signals.dialog_open.connect(func(): dialog_open = true)
+	Signals.dialog_closed.connect(func(): dialog_open = false)
+	
 func get_input():
 	var input_direction: Vector2 = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	velocity = input_direction * speed
@@ -15,6 +20,7 @@ func _unhandled_input(event: InputEvent) -> void:
 		toggle_candle()
 
 func _physics_process(_delta):
+	if dialog_open: return
 	get_input()
 	move_and_slide()
 
@@ -22,8 +28,6 @@ func set_animation(direction: Vector2) -> void:
 	if direction == Vector2.ZERO:
 		animated_sprite_2d.play("idle")
 		return
-
-	last_direction = direction
 
 	if abs(direction.x) > abs(direction.y):
 		if direction.x > 0:
@@ -39,3 +43,6 @@ func set_animation(direction: Vector2) -> void:
 func toggle_candle() -> void:
 	candle_light.visible = !candle_light.visible
 	#TODO Candle Sounds
+
+func _show_interact_hint(hint: bool) -> void:
+	interact_label.visible = hint
