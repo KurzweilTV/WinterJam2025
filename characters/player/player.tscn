@@ -1,7 +1,18 @@
-[gd_scene load_steps=23 format=3 uid="uid://hgbovpv3nek6"]
+[gd_scene load_steps=25 format=3 uid="uid://hgbovpv3nek6"]
 
 [ext_resource type="Texture2D" uid="uid://yc0i2yx4qwvu" path="res://art/characters/Basic_Characters.png" id="1_508ok"]
 [ext_resource type="Script" uid="uid://dxxyamrncmrts" path="res://characters/player/player.gd" id="1_xxgcw"]
+
+[sub_resource type="Gradient" id="Gradient_xxgcw"]
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_exd8k"]
+gradient = SubResource("Gradient_xxgcw")
+width = 16
+height = 16
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(1, 0.5)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xxgcw"]
 atlas = ExtResource("1_508ok")
@@ -158,15 +169,31 @@ animations = [{
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_508ok"]
-radius = 5.0
-height = 16.0
+radius = 3.0
+height = 14.0
 
 [node name="Player" type="CharacterBody2D"]
 script = ExtResource("1_xxgcw")
+speed = 40
+
+[node name="CandleLight" type="PointLight2D" parent="."]
+visible = false
+position = Vector2(0, 2.9802322e-08)
+scale = Vector2(7.5, 7.4218745)
+color = Color(0.7086463, 0.36517972, 1.92523e-07, 1)
+shadow_enabled = true
+shadow_filter = 2
+texture = SubResource("GradientTexture2D_exd8k")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_5dc8e")
 animation = &"idle"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+rotation = -1.5707964
 shape = SubResource("CapsuleShape2D_508ok")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(1.2, 1.2)
+position_smoothing_enabled = true
