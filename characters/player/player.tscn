@@ -245,7 +245,10 @@ zoom = Vector2(1.2, 1.2)
 position_smoothing_enabled = true
 
 [node name="InteractLabel" type="Label" parent="."]
+unique_name_in_owner = true
 visible = false
+modulate = Color(10.7927685, 10.7927685, 10.7927685, 0.43137255)
+light_mask = 0
 z_index = 100
 offset_left = -47.0
 offset_top = -41.0

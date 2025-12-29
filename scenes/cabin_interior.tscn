@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://b230wad6osqwg"]
+[gd_scene load_steps=8 format=4 uid="uid://b230wad6osqwg"]
 
 [ext_resource type="Script" uid="uid://dox5uma0ptupb" path="res://scenes/cabin_interior.gd" id="1_5t52d"]
 [ext_resource type="TileSet" uid="uid://oi3y4un2b70k" path="res://art/data/interior_tileset.tres" id="1_fgv04"]
@@ -9,8 +9,12 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t5apu"]
 size = Vector2(14, 38)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8feji"]
+size = Vector2(20, 41)
+
 [node name="CabinInterior" type="Node2D"]
 script = ExtResource("1_5t52d")
+disable_power_outage_event = false
 
 [node name="TilemapLayers" type="Node2D" parent="."]
 
@@ -36,7 +40,7 @@ position = Vector2(143, 78)
 [node name="InteractionPoints" type="Node2D" parent="."]
 
 [node name="CatPhoto" parent="InteractionPoints" node_paths=PackedStringArray("collision") instance=ExtResource("4_t5apu")]
-position = Vector2(199, 94)
+position = Vector2(199, 93)
 collision = NodePath("CollisionShape2D2")
 hint_text = "View Photo"
 interact_dialog = Array[String](["Here is a photo of Cricket", "The best boy ever"])
@@ -45,6 +49,16 @@ interact_dialog = Array[String](["Here is a photo of Cricket", "The best boy eve
 position = Vector2(1, 8)
 shape = SubResource("RectangleShape2D_t5apu")
 debug_color = Color(0.807357, 0.4149565, 0, 0.41960785)
+
+[node name="PhotoCluster" parent="InteractionPoints" node_paths=PackedStringArray("collision") instance=ExtResource("4_t5apu")]
+position = Vector2(56, 25)
+collision = NodePath("CollisionShape2D")
+hint_text = "View Photos"
+interact_dialog = Array[String](["Photos from a family vaction"])
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionPoints/PhotoCluster"]
+position = Vector2(0, 10.5)
+shape = SubResource("RectangleShape2D_8feji")
 
 [node name="Player" parent="." instance=ExtResource("2_kvx8o")]
 position = Vector2(57, 75)

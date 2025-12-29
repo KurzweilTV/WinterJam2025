@@ -4,7 +4,7 @@ class_name Player extends CharacterBody2D
 var dialog_open: bool = false
 @onready var animated_sprite_2d: AnimatedSprite2D = $AnimatedSprite2D
 @onready var candle_light: PointLight2D = $CandleLight
-@onready var interact_label: Label = $InteractLabel
+@onready var interact_label: Label = %InteractLabel
 
 func _ready() -> void:
 	Signals.dialog_open.connect(func(): dialog_open = true)
