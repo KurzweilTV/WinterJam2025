@@ -1,9 +1,13 @@
-[gd_scene load_steps=5 format=4 uid="uid://b230wad6osqwg"]
+[gd_scene load_steps=7 format=4 uid="uid://b230wad6osqwg"]
 
 [ext_resource type="Script" uid="uid://dox5uma0ptupb" path="res://scenes/cabin_interior.gd" id="1_5t52d"]
 [ext_resource type="TileSet" uid="uid://oi3y4un2b70k" path="res://art/data/interior_tileset.tres" id="1_fgv04"]
 [ext_resource type="PackedScene" uid="uid://hgbovpv3nek6" path="res://characters/player/player.tscn" id="2_kvx8o"]
 [ext_resource type="PackedScene" uid="uid://dueyynvjri4bv" path="res://objects/candle/candle.tscn" id="3_57a0a"]
+[ext_resource type="PackedScene" uid="uid://ce5u32wi2cs8x" path="res://objects/interaction_point/interaction_node.tscn" id="4_t5apu"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_t5apu"]
+size = Vector2(14, 38)
 
 [node name="CabinInterior" type="Node2D"]
 script = ExtResource("1_5t52d")
@@ -27,16 +31,20 @@ tile_map_data = PackedByteArray("AAALAAQAAgABAAEAAAALAAUAAgABAAIAAAALAAYAAgABAAM
 tile_set = ExtResource("1_fgv04")
 
 [node name="Candle" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
-position = Vector2(143, 73)
+position = Vector2(143, 78)
 
-[node name="Candle2" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
-position = Vector2(287, 143)
+[node name="InteractionPoints" type="Node2D" parent="."]
 
-[node name="Candle3" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
-position = Vector2(243, 52)
+[node name="CatPhoto" parent="InteractionPoints" node_paths=PackedStringArray("collision") instance=ExtResource("4_t5apu")]
+position = Vector2(199, 94)
+collision = NodePath("CollisionShape2D2")
+hint_text = "View Photo"
+interact_dialog = Array[String](["Here is a photo of Cricket", "The best boy ever"])
 
-[node name="Candle4" parent="TilemapLayers" instance=ExtResource("3_57a0a")]
-position = Vector2(35, 146)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="InteractionPoints/CatPhoto"]
+position = Vector2(1, 8)
+shape = SubResource("RectangleShape2D_t5apu")
+debug_color = Color(0.807357, 0.4149565, 0, 0.41960785)
 
 [node name="Player" parent="." instance=ExtResource("2_kvx8o")]
 position = Vector2(57, 75)

@@ -44,5 +44,8 @@ func toggle_candle() -> void:
 	candle_light.visible = !candle_light.visible
 	#TODO Candle Sounds
 
+func _set_interact_text(text: String) -> void:
+	interact_label.text = text
+
 func _show_interact_hint(hint: bool) -> void:
 	interact_label.visible = hint

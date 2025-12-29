@@ -52,6 +52,7 @@ radius = 29.017237
 script = ExtResource("1_shghq")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -5)
 sprite_frames = SubResource("SpriteFrames_o04kq")
 animation = &"burn"
 autoplay = "off"
